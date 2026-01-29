@@ -5,6 +5,12 @@ using Wellbeing.Application.Features.Clients.Commands.CreateClients;
 using Wellbeing.Application.Features.Clients.Commands.UpdateClients;
 using Wellbeing.Application.Features.AspNetUsers.Commands.CreateAspNetUsers;
 using Wellbeing.Application.Features.AspNetUsers.Commands.UpdateAspNetUsers;
+using Wellbeing.Application.Features.WellbeingDimensions.Commands.CreateWellbeingDimension;
+using Wellbeing.Application.Features.WellbeingDimensions.Commands.UpdateWellbeingDimension;
+using Wellbeing.Application.Features.WellbeingSubDimensions.Commands.CreateWellbeingSubDimension;
+using Wellbeing.Application.Features.WellbeingSubDimensions.Commands.UpdateWellbeingSubDimension;
+using Wellbeing.Application.Features.Questions.Commands.CreateQuestion;
+using Wellbeing.Application.Features.Questions.Commands.UpdateQuestion;
 using System.Text.Json;
 
 namespace Wellbeing.Application.Mappings;
@@ -53,5 +59,26 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpperInvariant()))
             .ForMember(dest => dest.PasswordHash, opt => opt.Condition(src => !string.IsNullOrEmpty(src.PasswordHash)))
             .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore());
+
+        CreateMap<WellbeingDimension, WellbeingDimensionDto>()
+            .ForMember(dest => dest.ClientsName, opt => opt.Ignore())
+            .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt));
+        CreateMap<CreateWellbeingDimensionCommand, WellbeingDimension>();
+        CreateMap<UpdateWellbeingDimensionCommand, WellbeingDimension>();
+
+        CreateMap<WellbeingSubDimension, WellbeingSubDimensionDto>()
+            .ForMember(dest => dest.WellbeingDimensionName, opt => opt.Ignore())
+            .ForMember(dest => dest.ClientsName, opt => opt.Ignore())
+            .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt));
+        CreateMap<CreateWellbeingSubDimensionCommand, WellbeingSubDimension>();
+        CreateMap<UpdateWellbeingSubDimensionCommand, WellbeingSubDimension>();
+
+        CreateMap<Question, QuestionDto>()
+            .ForMember(dest => dest.WellbeingDimensionName, opt => opt.Ignore())
+            .ForMember(dest => dest.WellbeingSubDimensionName, opt => opt.Ignore())
+            .ForMember(dest => dest.ClientsName, opt => opt.Ignore())
+            .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt));
+        CreateMap<CreateQuestionCommand, Question>();
+        CreateMap<UpdateQuestionCommand, Question>();
     }
 }

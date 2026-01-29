@@ -10,4 +10,5 @@ public class Clients : BaseEntity
     public string ClientSettings { get; set; } = string.Empty;
 
     public virtual ICollection<AspNetUsers> AspNetUsers { get; set; } = new List<AspNetUsers>();
+    public virtual ICollection<WellbeingDimension> WellbeingDimensions { get; set; } = new List<WellbeingDimension>();
 }
