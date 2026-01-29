@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj": {}
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj": {}
   },
   "projects": {
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj": {
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj",
+        "projectUniqueName": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj",
         "projectName": "Wellbeing.Domain",
-        "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj",
+        "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj",
         "packagesPath": "/home/talha/.nuget/packages/",
-        "outputPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/",
+        "outputPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/talha/.nuget/NuGet/NuGet.Config"

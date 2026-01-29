@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9ukWv5XXSWXNAbRtVMHY1+VXt8yZuk2jsH0nKA+6nYEZCssymyvLmDLV4ztiVOACusr9VCHyOsc8NmEFhDSuaA==",
+  "dgSpecHash": "idAdwEKiJRe4dc1TmNm3cEPpn9aQnyoEgTH+dUyHeolt7/W9Jj1L/3VmZza34gMZ78JRD3Fyh09B4xFIAFknLw==",
   "success": true,
-  "projectFilePath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
+  "projectFilePath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/home/talha/.nuget/packages/automapper/11.0.0/automapper.11.0.0.nupkg.sha512",
     "/home/talha/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

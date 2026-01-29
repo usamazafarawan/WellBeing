@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.API/Wellbeing.API.csproj": {}
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.API/Wellbeing.API.csproj": {}
   },
   "projects": {
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.API/Wellbeing.API.csproj": {
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.API/Wellbeing.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/talha/Documents/USAMA_BHAI/Wellbeing.API/Wellbeing.API.csproj",
+        "projectUniqueName": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.API/Wellbeing.API.csproj",
         "projectName": "Wellbeing.API",
-        "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.API/Wellbeing.API.csproj",
+        "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.API/Wellbeing.API.csproj",
         "packagesPath": "/home/talha/.nuget/packages/",
-        "outputPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.API/obj/",
+        "outputPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/talha/.nuget/NuGet/NuGet.Config"
@@ -26,11 +26,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj": {
-                "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj"
+              "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj": {
+                "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj"
               },
-              "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj": {
-                "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj"
+              "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj": {
+                "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj"
               }
             }
           }
@@ -79,14 +79,14 @@
         }
       }
     },
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj": {
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj",
+        "projectUniqueName": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj",
         "projectName": "Wellbeing.Application",
-        "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj",
+        "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj",
         "packagesPath": "/home/talha/.nuget/packages/",
-        "outputPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/obj/",
+        "outputPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/talha/.nuget/NuGet/NuGet.Config"
@@ -101,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj": {
-                "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj"
+              "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj": {
+                "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj"
               }
             }
           }
@@ -158,14 +158,14 @@
         }
       }
     },
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj": {
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj",
+        "projectUniqueName": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj",
         "projectName": "Wellbeing.Domain",
-        "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj",
+        "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj",
         "packagesPath": "/home/talha/.nuget/packages/",
-        "outputPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/",
+        "outputPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/talha/.nuget/NuGet/NuGet.Config"
@@ -211,14 +211,14 @@
         }
       }
     },
-    "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj": {
+    "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
+        "projectUniqueName": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
         "projectName": "Wellbeing.Infrastructure",
-        "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
+        "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/Wellbeing.Infrastructure.csproj",
         "packagesPath": "/home/talha/.nuget/packages/",
-        "outputPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Infrastructure/obj/",
+        "outputPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/talha/.nuget/NuGet/NuGet.Config"
@@ -233,11 +233,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj": {
-                "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Application/Wellbeing.Application.csproj"
+              "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj": {
+                "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj"
               },
-              "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj": {
-                "projectPath": "/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/Wellbeing.Domain.csproj"
+              "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj": {
+                "projectPath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Domain/Wellbeing.Domain.csproj"
               }
             }
           }
