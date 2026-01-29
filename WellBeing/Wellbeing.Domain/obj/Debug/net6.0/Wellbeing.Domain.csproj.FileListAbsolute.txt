@@ -1,0 +1,12 @@
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/bin/Debug/net6.0/Wellbeing.Domain.deps.json
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/bin/Debug/net6.0/Wellbeing.Domain.dll
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/bin/Debug/net6.0/Wellbeing.Domain.pdb
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.csproj.AssemblyReference.cache
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.AssemblyInfoInputs.cache
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.AssemblyInfo.cs
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.csproj.CoreCompileInputs.cache
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.dll
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/refint/Wellbeing.Domain.dll
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/Wellbeing.Domain.pdb
+/home/talha/Documents/USAMA_BHAI/Wellbeing.Domain/obj/Debug/net6.0/ref/Wellbeing.Domain.dll
