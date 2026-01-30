@@ -94,6 +94,8 @@ cd WellBeing
 
 If you don't have Git, download the project as a ZIP file and extract it to your desired location.
 
+**Note:** The project includes a `.gitignore` file that excludes build artifacts, IDE files, and other generated files from version control. This ensures only source code and configuration files are tracked.
+
 ### Step 2: Verify Project Structure
 
 Ensure you have the following folder structure:
@@ -228,6 +230,21 @@ Host=localhost;Port=5432;Database=WellbeingDb;Username=postgres;Password=your_pa
 - User Secrets (for development)
 - Environment Variables
 - Azure Key Vault or similar secure storage
+
+**Version Control:**
+- The project includes a `.gitignore` file that automatically excludes:
+  - Build outputs (`bin/`, `obj/`)
+  - IDE-specific files (Visual Studio, VS Code, Rider)
+  - User-specific settings
+  - Temporary files and logs
+  - NuGet package caches
+- Configuration files (`appsettings.json`, `appsettings.Development.json`) are included in the repository
+- **Important:** Never commit actual passwords or connection strings with real credentials
+- Use User Secrets for sensitive development data:
+  ```powershell
+  dotnet user-secrets init --project Wellbeing.API
+  dotnet user-secrets set "ConnectionStrings:DefaultConnection" "your-connection-string" --project Wellbeing.API
+  ```
 
 ### CORS Configuration
 
@@ -381,50 +398,75 @@ dotnet tool install --global dotnet-ef
 
 **This error occurs when:**
 - Migrations haven't been applied to the database
-- The database is in an inconsistent state
-- The application tries to access tables before migrations complete
+- The database is in an inconsistent state (migrations partially applied)
+- Foreign key constraints try to reference tables that don't exist yet
+- The migration sequence has issues (especially the table rename migration)
+
+**Common Scenario:**
+When creating tables like `WellbeingDimensions`, `WellbeingSubDimensions`, or `Questions`, they reference the `Clients` table via foreign keys. If the `Clients` table doesn't exist (due to incomplete migrations), you'll see this error.
 
 **Solutions (try in order):**
 
-1. **Automatic Migration (Easiest):**
-   - The application automatically applies migrations in Development mode
-   - Simply run the application: `dotnet run` from the `Wellbeing.API` directory
-   - The migrations will be applied on startup
-
-2. **Manual Migration:**
-   - Navigate to `Wellbeing.API` directory
-   - Run: `dotnet ef database update`
-   - If `dotnet ef` is not found, install it: `dotnet tool install --global dotnet-ef`
-
-3. **Reset Database (if migrations are corrupted):**
+1. **Reset Database (Recommended for Fresh Setup):**
    - **Warning:** This will delete all data!
-   - Connect to PostgreSQL using pgAdmin or psql
-   - Drop and recreate the database:
+   - Connect to PostgreSQL using pgAdmin or psql:
      ```sql
      DROP DATABASE IF EXISTS "WellbeingDb";
      CREATE DATABASE "WellbeingDb";
      ```
-   - Then run the application or `dotnet ef database update`
+   - Then run the application: `dotnet run` from `Wellbeing.API` directory
+   - Migrations will be applied automatically in Development mode
 
-4. **Check Migration Status:**
-   - Verify migrations exist in `Wellbeing.Infrastructure/Migrations/`
-   - Check if `__EFMigrationsHistory` table exists in your database
-   - If it exists, check which migrations have been applied:
+2. **Check Migration Status:**
+   - Connect to your database using pgAdmin or psql
+   - Check which migrations have been applied:
      ```sql
-     SELECT * FROM "__EFMigrationsHistory";
+     SELECT * FROM "__EFMigrationsHistory" ORDER BY "MigrationId";
      ```
+   - Verify the expected migrations are listed:
+     - `20250129000000_InitialCreate`
+     - `20250129000001_RenameTablesToClientsAndAspNetUsers`
+     - `20250129000002_UpdateClientsStructure`
+     - `20250129000003_UpdateAspNetUsersStructure`
+     - `20260129230241_AddWellbeingDimensionsTable`
+     - `20260129231007_AddWellbeingSubDimensionsTable`
+     - `20260129231616_AddQuestionsTable`
+
+3. **Manual Migration (if automatic fails):**
+   - Navigate to `Wellbeing.API` directory
+   - Run: `dotnet ef database update`
+   - If `dotnet ef` is not found, install it: `dotnet tool install --global dotnet-ef`
+   - If you see errors, reset the database (see Solution 1)
+
+4. **Verify Tables Exist:**
+   - Check if the `Clients` table exists:
+     ```sql
+     SELECT table_name FROM information_schema.tables 
+     WHERE table_schema = 'public' AND table_name = 'Clients';
+     ```
+   - If it doesn't exist, the migrations haven't run correctly - reset the database
 
 5. **Verify Connection String:**
    - Ensure `appsettings.json` and `appsettings.Development.json` have correct connection strings
-   - Test connection using pgAdmin or psql
+   - Test connection using pgAdmin or psql:
+     ```sql
+     \c WellbeingDb
+     ```
 
-6. **Clean and Rebuild:**
+6. **Clean and Rebuild (if issues persist):**
    ```powershell
    dotnet clean
    dotnet restore
    dotnet build
+   cd Wellbeing.API
    dotnet ef database update --project ../Wellbeing.Infrastructure
    ```
+
+**Important Notes:**
+- The migration sequence includes a table rename operation (`RenameTablesToClientsAndAspNetUsers`)
+- If migrations are applied out of order or partially, the database can be in an inconsistent state
+- The safest solution is to drop and recreate the database, then let migrations run from scratch
+- The application will automatically apply migrations on startup in Development mode
 
 ### Issue: Port already in use
 
