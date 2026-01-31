@@ -3,53 +3,37 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# User-specific files
-*.rsuser
-*.suo
+# ===========================================
+# .NET Core / .NET 5+ / .NET 8
+# ===========================================
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
 *.user
+*.suo
 *.userosscache
 *.sln.docstates
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
 
-# User-specific files (MonoDevelop/Xamarin Studio)
-*.userprefs
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
 
-# Mono auto generated files
-mono_crash.*
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+# StyleCop
+StyleCopReport.xml
 
-# Visual Studio 2015/2017 cache/options directory
-.vs/
-# Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/
-
-# Visual Studio 2017 auto generated files
-Generated\ Files/
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
-
-# Build Results
+# Files built by Visual Studio
 *_i.c
 *_p.c
 *_h.h
@@ -78,19 +62,50 @@ nunit-*.xml
 *.svclog
 *.scc
 
-# Chutzpah Test files
-_Chutzpah*
+# ===========================================
+# Build Results
+# ===========================================
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Oo]ut/
 
-# Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
-*.VC.db
-*.VC.VC.opendb
+# ===========================================
+# Visual Studio
+# ===========================================
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
 
 # Visual Studio profiler
 *.psess
@@ -162,27 +177,17 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-# Note: Comment the next line if you want to checkin your web deploy settings,
-# but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
 *.publishproj
 
-# Microsoft Azure Web App publish settings. Comment the next line if you want to
-# checkin your Azure Web App publish settings, but sensitive information contained
-# in these scripts will be unencrypted
+# Microsoft Azure Web App publish settings
 PublishScripts/
 
 # NuGet Packages
 *.nupkg
-# NuGet Symbol Packages
 *.snupkg
-# The packages folder can be ignored because of Package Restore
 **/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
-# Uncomment if necessary however generally it will be regenerated when needed
-#!**/[Pp]ackages/repositories.config
-# NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
 
@@ -204,9 +209,7 @@ _pkginfo.txt
 *.appxupload
 
 # Visual Studio cache files
-# files ending in .cache can be ignored
 *.[Cc]ache
-# but keep track of directories ending in .cache
 !?*.[Cc]ache/
 
 # Others
@@ -221,19 +224,13 @@ ClientBin/
 orleans.codegen.cs
 
 # Including strong name files can present a security risk
-# (https://github.com/github/gitignore/pull/2483#issue-259490424)
 #*.snk
-
-# Since there are multiple workflows, uncomment next line to ignore bower_components
-# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
-#bower_components/
 
 # RIA/Silverlight projects
 Generated_Code/
 
 # Backup & report files from converting an old project file
-# to a newer Visual Studio version. Backup files are not needed,
-# because we have git ;-)
+# to a newer Visual Studio version
 _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
@@ -271,7 +268,7 @@ node_modules/
 # Visual Studio 6 workspace options file
 *.opt
 
-# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+# Visual Studio 6 auto-generated workspace file
 *.vbw
 
 # Visual Studio LightSwitch build output
@@ -295,10 +292,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-
-# Cake - Uncomment if you are using it
-# tools/**
-# !tools/packages.config
 
 # Tabs Studio
 *.tss
@@ -342,16 +335,145 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# VS Code files for those working on multiple tools
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
+# JetBrains Rider
+.idea/
+*.sln.iml
 
-# Local History for Visual Studio Code
-.history/
+# ===========================================
+# Entity Framework
+# ===========================================
+# Note: Migrations should be committed, but uncomment if you want to ignore them
+# **/Migrations/*.Designer.cs
+# **/Migrations/*.cs
+# !**/Migrations/*Snapshot.cs
+
+# ===========================================
+# Database Files
+# ===========================================
+# SQL Server
+*.mdf
+*.ldf
+*.ndf
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL (local dumps, backups)
+*.sql.backup
+*.sql.gz
+*.dump
+pg_dump_*
+
+# ===========================================
+# Application Settings & Secrets
+# ===========================================
+# Uncomment the following lines if you want to ignore appsettings with sensitive data
+# appsettings.*.json
+# !appsettings.json
+# !appsettings.Development.json
+
+# User secrets (stored in %APPDATA%\Microsoft\UserSecrets on Windows)
+# or ~/.microsoft/usersecrets on Linux/Mac
+**/Properties/secrets.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# ===========================================
+# Logs
+# ===========================================
+logs/
+*.log
+*.log.*
+
+# ===========================================
+# Testing
+# ===========================================
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# ===========================================
+# Temporary Files
+# ===========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ===========================================
+# OS Generated Files
+# ===========================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===========================================
+# Docker
+# ===========================================
+.dockerignore
+docker-compose.override.yml
+*.dockerignore
+
+# ===========================================
+# Miscellaneous
+# ===========================================
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
 
 # Windows Installer files from build outputs
 *.cab
@@ -360,48 +482,13 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# JetBrains Rider
-.idea/
-*.sln.iml
+# Mono auto generated files
+mono_crash.*
 
-# macOS
-.DS_Store
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
 
-# Linux
-*~
-
-# Application specific
-# Uncomment if you want to ignore appsettings with sensitive data
-# appsettings.*.json
-# !appsettings.json
-# !appsettings.Development.json
-
-# Database files (if using local SQLite or similar)
-*.db
-*.sqlite
-*.sqlite3
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# User secrets (already handled by default .NET user secrets location)
-# But you can add if you want to be explicit
-# UserSecretsId
-
-# Logs
-logs/
-*.log
-
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*.swo
-*~
-
-# OS generated files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+# ===========================================
+# Project Specific
+# ===========================================
+# Add any project-specific ignore patterns here

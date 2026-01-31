@@ -22,12 +22,21 @@ public class MappingProfile : Profile
         CreateMap<Clients, ClientsDto>()
             .ForMember(dest => dest.AspNetUsersCount, opt => opt.Ignore())
             .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt))
+            .ForMember(dest => dest.ClientSettings, opt => opt.Ignore()) // Ignore automatic mapping, handle in AfterMap
             .AfterMap((src, dest) =>
             {
                 if (!string.IsNullOrEmpty(src.ClientSettings))
                 {
-                    using var doc = JsonDocument.Parse(src.ClientSettings);
-                    dest.ClientSettings = doc.RootElement.Clone();
+                    try
+                    {
+                        using var doc = JsonDocument.Parse(src.ClientSettings);
+                        dest.ClientSettings = doc.RootElement.Clone();
+                    }
+                    catch (JsonException)
+                    {
+                        // If parsing fails, use empty JSON object
+                        dest.ClientSettings = JsonDocument.Parse("{}").RootElement.Clone();
+                    }
                 }
                 else
                 {

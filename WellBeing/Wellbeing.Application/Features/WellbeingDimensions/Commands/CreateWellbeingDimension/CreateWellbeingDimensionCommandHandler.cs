@@ -1,5 +1,6 @@
 using MediatR;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Wellbeing.Application.DTOs;
 using Wellbeing.Application.Common.Interfaces;
 using WellbeingDimensionEntity = Wellbeing.Domain.Entities.WellbeingDimension;
@@ -22,6 +23,16 @@ public class CreateWellbeingDimensionCommandHandler : IRequestHandler<CreateWell
     public async Task<WellbeingDimensionDto> Handle(CreateWellbeingDimensionCommand request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating new Wellbeing Dimension with name: {Name}, ClientId: {ClientsId}", request.Name, request.ClientsId);
+
+        // Validate ClientsId exists and is not deleted
+        var client = await _context.Clients
+            .FirstOrDefaultAsync(c => c.Id == request.ClientsId && !c.IsDeleted, cancellationToken);
+        
+        if (client == null)
+        {
+            _logger.LogWarning("Client with ID {ClientsId} not found or is deleted", request.ClientsId);
+            throw new KeyNotFoundException($"Client with ID {request.ClientsId} was not found or is deleted.");
+        }
 
         var wellbeingDimension = new WellbeingDimensionEntity
         {

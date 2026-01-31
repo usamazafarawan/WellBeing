@@ -25,7 +25,7 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
         if (question == null)
         {
             _logger.LogWarning("Question with ID {Id} not found", request.Id);
-            throw new KeyNotFoundException($"Question with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"Question with ID {request.Id} was not found or has been deleted.");
         }
 
         question.IsDeleted = true;

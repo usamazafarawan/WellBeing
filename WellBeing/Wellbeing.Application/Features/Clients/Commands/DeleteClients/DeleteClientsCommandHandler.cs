@@ -24,8 +24,8 @@ public class DeleteClientsCommandHandler : IRequestHandler<DeleteClientsCommand,
 
         if (clients == null)
         {
-            _logger.LogWarning("Clients with ID {ClientsId} not found for deletion", request.Id);
-            throw new KeyNotFoundException($"Clients with ID {request.Id} was not found.");
+            _logger.LogWarning("Client with ID {ClientsId} not found for deletion", request.Id);
+            throw new KeyNotFoundException($"Client with ID {request.Id} was not found or has been deleted.");
         }
 
         clients.IsDeleted = true;
@@ -40,7 +40,6 @@ public class DeleteClientsCommandHandler : IRequestHandler<DeleteClientsCommand,
         foreach (var aspNetUser in aspNetUsers)
         {
             aspNetUser.IsDeleted = true;
-            aspNetUser.UpdatedAt = DateTime.UtcNow;
         }
 
         await _context.SaveChangesAsync(cancellationToken);

@@ -12,6 +12,7 @@
           "FluentValidation.DependencyInjectionExtensions": "11.9.2",
           "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "8.0.11",
+          "Npgsql": "8.0.4",
           "Wellbeing.Domain": "1.0.0"
         },
         "runtime": {
@@ -194,6 +195,17 @@
           }
         }
       },
+      "Npgsql/8.0.4": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.dll": {
+            "assemblyVersion": "8.0.4.0",
+            "fileVersion": "8.0.4.0"
+          }
+        }
+      },
       "Wellbeing.Domain/1.0.0": {
         "runtime": {
           "Wellbeing.Domain.dll": {
@@ -335,6 +347,13 @@
       "sha512": "sha512-bXJEZrW9ny8vjMF1JV253WeLhpEVzFo1lyaZu1vQ4ZxWUlVvknZ/+ftFgVheLubb4eZPSwwxBeqS1JkCOjxd8g==",
       "path": "microsoft.extensions.primitives/8.0.0",
       "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+    },
+    "Npgsql/8.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vaYEUlF/pB9m8bs21wQv3Da0kMHT4A9USe47VfY/L2BO97xz5KfIxhEu22QS9d68ZrLxvtL3wQDfDLPr2OjbjA==",
+      "path": "npgsql/8.0.4",
+      "hashPath": "npgsql.8.0.4.nupkg.sha512"
     },
     "Wellbeing.Domain/1.0.0": {
       "type": "project",

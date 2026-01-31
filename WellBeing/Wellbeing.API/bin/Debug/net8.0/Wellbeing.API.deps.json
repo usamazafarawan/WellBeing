@@ -632,6 +632,7 @@
           "FluentValidation.DependencyInjectionExtensions": "11.9.2",
           "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "8.0.11",
+          "Npgsql": "8.0.6",
           "Wellbeing.Domain": "1.0.0"
         },
         "runtime": {

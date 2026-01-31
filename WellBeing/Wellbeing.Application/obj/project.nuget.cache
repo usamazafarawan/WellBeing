@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c6z3zxt4/Ys=",
+  "dgSpecHash": "Y8g3tiiTS7Q=",
   "success": true,
   "projectFilePath": "/home/talha/Documents/WellBeing/WellBeing/Wellbeing.Application/Wellbeing.Application.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,8 @@
     "/home/talha/.nuget/packages/microsoft.extensions.logging/8.0.1/microsoft.extensions.logging.8.0.1.nupkg.sha512",
     "/home/talha/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
     "/home/talha/.nuget/packages/microsoft.extensions.options/8.0.2/microsoft.extensions.options.8.0.2.nupkg.sha512",
-    "/home/talha/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+    "/home/talha/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/home/talha/.nuget/packages/npgsql/8.0.4/npgsql.8.0.4.nupkg.sha512"
   ],
   "logs": []
 }

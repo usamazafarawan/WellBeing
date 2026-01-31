@@ -25,7 +25,7 @@ public class GetAspNetUsersByIdQueryHandler : IRequestHandler<GetAspNetUsersById
 
         if (aspNetUser == null)
         {
-            throw new KeyNotFoundException($"AspNetUsers with ID {request.Id} was not found.");
+            throw new KeyNotFoundException($"User with ID {request.Id} was not found or has been deleted.");
         }
 
         var aspNetUsersDto = _mapper.Map<AspNetUsersDto>(aspNetUser);

@@ -29,7 +29,17 @@ public class UpdateWellbeingDimensionCommandHandler : IRequestHandler<UpdateWell
         if (wellbeingDimension == null)
         {
             _logger.LogWarning("Wellbeing Dimension with ID {Id} not found", request.Id);
-            throw new KeyNotFoundException($"Wellbeing Dimension with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"Wellbeing Dimension with ID {request.Id} was not found or has been deleted.");
+        }
+
+        // Validate ClientsId exists and is not deleted
+        var client = await _context.Clients
+            .FirstOrDefaultAsync(c => c.Id == request.ClientsId && !c.IsDeleted, cancellationToken);
+        
+        if (client == null)
+        {
+            _logger.LogWarning("Client with ID {ClientsId} not found or is deleted", request.ClientsId);
+            throw new KeyNotFoundException($"Client with ID {request.ClientsId} was not found or is deleted.");
         }
 
         wellbeingDimension.Name = request.Name;

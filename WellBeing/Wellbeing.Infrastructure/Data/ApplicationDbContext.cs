@@ -28,7 +28,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Domain).IsRequired().HasMaxLength(255);
             entity.Property(e => e.InstructionsText).IsRequired().HasMaxLength(5000);
-            entity.Property(e => e.ClientSettings).IsRequired().HasColumnType("jsonb");
+            entity.Property(e => e.ClientSettings)
+                .IsRequired()
+                .HasColumnType("jsonb")
+                .HasDefaultValue("{}");
             entity.HasIndex(e => e.Domain).IsUnique();
             entity.HasQueryFilter(e => !e.IsDeleted);
         });
@@ -54,6 +57,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.HasIndex(e => e.NormalizedUserName).IsUnique();
             entity.HasIndex(e => e.NormalizedEmail).IsUnique();
             entity.HasQueryFilter(e => !e.IsDeleted);
+            
+            // Ignore UpdatedAt property as it doesn't exist in the database table
+            entity.Ignore(e => e.UpdatedAt);
 
             entity.HasOne(c => c.Clients)
                 .WithMany(co => co.AspNetUsers)
@@ -158,7 +164,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                     entry.Entity.CreatedAt = DateTime.UtcNow;
                     break;
                 case EntityState.Modified:
-                    entry.Entity.UpdatedAt = DateTime.UtcNow;
                     break;
             }
         }

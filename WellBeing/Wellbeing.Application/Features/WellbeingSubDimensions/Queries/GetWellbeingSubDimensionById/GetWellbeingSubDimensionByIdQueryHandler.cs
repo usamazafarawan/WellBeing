@@ -26,7 +26,7 @@ public class GetWellbeingSubDimensionByIdQueryHandler : IRequestHandler<GetWellb
 
         if (wellbeingSubDimension == null)
         {
-            throw new KeyNotFoundException($"Wellbeing Sub-Dimension with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"Wellbeing Sub-Dimension with ID {request.Id} was not found or has been deleted.");
         }
 
         var dto = _mapper.Map<WellbeingSubDimensionDto>(wellbeingSubDimension);

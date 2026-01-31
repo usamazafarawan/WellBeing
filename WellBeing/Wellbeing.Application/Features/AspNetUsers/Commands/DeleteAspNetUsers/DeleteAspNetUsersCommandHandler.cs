@@ -25,11 +25,10 @@ public class DeleteAspNetUsersCommandHandler : IRequestHandler<DeleteAspNetUsers
         if (aspNetUser == null)
         {
             _logger.LogWarning("AspNetUsers with ID {AspNetUsersId} not found for deletion", request.Id);
-            throw new KeyNotFoundException($"AspNetUsers with ID {request.Id} was not found.");
+            throw new KeyNotFoundException($"User with ID {request.Id} was not found or has been deleted.");
         }
 
         aspNetUser.IsDeleted = true;
-        aspNetUser.UpdatedAt = DateTime.UtcNow;
         aspNetUser.ConcurrencyStamp = Guid.NewGuid().ToString();
 
         await _context.SaveChangesAsync(cancellationToken);

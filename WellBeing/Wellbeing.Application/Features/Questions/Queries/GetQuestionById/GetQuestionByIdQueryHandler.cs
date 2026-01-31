@@ -27,7 +27,7 @@ public class GetQuestionByIdQueryHandler : IRequestHandler<GetQuestionByIdQuery,
 
         if (question == null)
         {
-            throw new KeyNotFoundException($"Question with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"Question with ID {request.Id} was not found or has been deleted.");
         }
 
         var dto = _mapper.Map<QuestionDto>(question);

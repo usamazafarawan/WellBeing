@@ -1,5 +1,6 @@
 using MediatR;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Wellbeing.Application.DTOs;
 using Wellbeing.Application.Common.Interfaces;
 using WellbeingSubDimensionEntity = Wellbeing.Domain.Entities.WellbeingSubDimension;
@@ -23,6 +24,26 @@ public class CreateWellbeingSubDimensionCommandHandler : IRequestHandler<CreateW
     {
         _logger.LogInformation("Creating new Wellbeing Sub-Dimension with name: {Name}, DimensionId: {WellbeingDimensionId}, ClientId: {ClientsId}", 
             request.Name, request.WellbeingDimensionId, request.ClientsId);
+
+        // Validate ClientsId exists and is not deleted
+        var client = await _context.Clients
+            .FirstOrDefaultAsync(c => c.Id == request.ClientsId && !c.IsDeleted, cancellationToken);
+        
+        if (client == null)
+        {
+            _logger.LogWarning("Client with ID {ClientsId} not found or is deleted", request.ClientsId);
+            throw new KeyNotFoundException($"Client with ID {request.ClientsId} was not found or is deleted.");
+        }
+
+        // Validate WellbeingDimensionId exists and is not deleted
+        var dimension = await _context.WellbeingDimensions
+            .FirstOrDefaultAsync(d => d.Id == request.WellbeingDimensionId && !d.IsDeleted, cancellationToken);
+        
+        if (dimension == null)
+        {
+            _logger.LogWarning("WellbeingDimension with ID {WellbeingDimensionId} not found or is deleted", request.WellbeingDimensionId);
+            throw new KeyNotFoundException($"Wellbeing Dimension with ID {request.WellbeingDimensionId} was not found or is deleted.");
+        }
 
         var wellbeingSubDimension = new WellbeingSubDimensionEntity
         {

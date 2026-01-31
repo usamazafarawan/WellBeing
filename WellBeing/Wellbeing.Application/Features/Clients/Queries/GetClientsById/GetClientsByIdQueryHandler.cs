@@ -20,16 +20,18 @@ public class GetClientsByIdQueryHandler : IRequestHandler<GetClientsByIdQuery, C
     public async Task<ClientsDto> Handle(GetClientsByIdQuery request, CancellationToken cancellationToken)
     {
         var clients = await _context.Clients
-            .Include(c => c.AspNetUsers)
             .FirstOrDefaultAsync(x => x.Id == request.Id && !x.IsDeleted, cancellationToken);
 
         if (clients == null)
         {
-            throw new KeyNotFoundException($"Clients with ID {request.Id} was not found.");
+            throw new KeyNotFoundException($"Client with ID {request.Id} was not found or has been deleted.");
         }
 
+        var aspNetUsersCount = await _context.AspNetUsers
+            .CountAsync(a => a.ClientsId == clients.Id && !a.IsDeleted, cancellationToken);
+
         var clientsDto = _mapper.Map<ClientsDto>(clients);
-        clientsDto.AspNetUsersCount = clients.AspNetUsers.Count(c => !c.IsDeleted);
+        clientsDto.AspNetUsersCount = aspNetUsersCount;
         return clientsDto;
     }
 }

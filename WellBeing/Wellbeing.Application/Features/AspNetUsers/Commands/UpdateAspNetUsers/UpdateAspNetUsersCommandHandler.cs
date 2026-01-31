@@ -31,7 +31,7 @@ public class UpdateAspNetUsersCommandHandler : IRequestHandler<UpdateAspNetUsers
         if (aspNetUser == null)
         {
             _logger.LogWarning("AspNetUsers with ID {AspNetUsersId} not found for update", request.Id);
-            throw new KeyNotFoundException($"AspNetUsers with ID {request.Id} was not found.");
+            throw new KeyNotFoundException($"User with ID {request.Id} was not found or has been deleted.");
         }
 
         var clients = aspNetUser.Clients;
@@ -43,7 +43,7 @@ public class UpdateAspNetUsersCommandHandler : IRequestHandler<UpdateAspNetUsers
             if (clients == null)
             {
                 _logger.LogWarning("Clients with ID {ClientsId} not found when updating aspnetusers", request.ClientsId);
-                throw new KeyNotFoundException($"Clients with ID {request.ClientsId} was not found.");
+                throw new KeyNotFoundException($"Client with ID {request.ClientsId} was not found or has been deleted.");
             }
         }
 
@@ -72,7 +72,6 @@ public class UpdateAspNetUsersCommandHandler : IRequestHandler<UpdateAspNetUsers
         }
 
         aspNetUser.ConcurrencyStamp = Guid.NewGuid().ToString();
-        aspNetUser.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync(cancellationToken);
 

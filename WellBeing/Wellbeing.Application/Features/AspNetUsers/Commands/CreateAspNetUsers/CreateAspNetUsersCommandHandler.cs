@@ -30,7 +30,7 @@ public class CreateAspNetUsersCommandHandler : IRequestHandler<CreateAspNetUsers
         if (clients == null)
         {
             _logger.LogWarning("Clients with ID {ClientsId} not found when creating aspnetusers", request.ClientsId);
-            throw new KeyNotFoundException($"Clients with ID {request.ClientsId} was not found.");
+            throw new KeyNotFoundException($"Client with ID {request.ClientsId} was not found or has been deleted.");
         }
 
         var normalizedUserName = request.UserName.ToUpperInvariant();

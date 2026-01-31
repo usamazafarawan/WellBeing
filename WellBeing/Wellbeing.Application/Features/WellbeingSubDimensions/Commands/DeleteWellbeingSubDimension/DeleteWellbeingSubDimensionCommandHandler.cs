@@ -25,7 +25,7 @@ public class DeleteWellbeingSubDimensionCommandHandler : IRequestHandler<DeleteW
         if (wellbeingSubDimension == null)
         {
             _logger.LogWarning("Wellbeing Sub-Dimension with ID {Id} not found", request.Id);
-            throw new KeyNotFoundException($"Wellbeing Sub-Dimension with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"Wellbeing Sub-Dimension with ID {request.Id} was not found or has been deleted.");
         }
 
         wellbeingSubDimension.IsDeleted = true;
