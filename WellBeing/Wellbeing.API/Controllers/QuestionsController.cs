@@ -27,11 +27,25 @@ public class QuestionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<QuestionDto>>> GetAllQuestions(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<QuestionDto>>> GetAllQuestions(
+        [FromQuery] int? surveyId,
+        [FromQuery] int? clientsId,
+        CancellationToken cancellationToken)
     {
         _logger.LogInformation("Getting all questions");
-        var questions = await _mediator.Send(new GetAllQuestionsQuery(), cancellationToken);
+        var query = new GetAllQuestionsQuery { SurveyId = surveyId, ClientsId = clientsId };
+        var questions = await _mediator.Send(query, cancellationToken);
         _logger.LogInformation("Retrieved {Count} questions", questions.Count());
+        return Ok(questions);
+    }
+
+    [HttpGet("survey/{surveyId}")]
+    public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuestionsBySurveyId(int surveyId, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Getting questions for survey ID: {SurveyId}", surveyId);
+        var query = new GetAllQuestionsQuery { SurveyId = surveyId };
+        var questions = await _mediator.Send(query, cancellationToken);
+        _logger.LogInformation("Retrieved {Count} questions for survey {SurveyId}", questions.Count(), surveyId);
         return Ok(questions);
     }
 

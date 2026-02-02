@@ -19,17 +19,34 @@ public class GetAllQuestionsQueryHandler : IRequestHandler<GetAllQuestionsQuery,
 
     public async Task<IEnumerable<QuestionDto>> Handle(GetAllQuestionsQuery request, CancellationToken cancellationToken)
     {
-        var questions = await _context.Questions
+        var query = _context.Questions
+            .Include(q => q.Survey)
             .Include(q => q.WellbeingDimension)
             .Include(q => q.WellbeingSubDimension)
             .Include(q => q.Clients)
             .Where(x => !x.IsDeleted)
-            .OrderBy(x => x.CreatedAt)
+            .AsQueryable();
+
+        if (request.SurveyId.HasValue)
+        {
+            query = query.Where(q => q.SurveyId == request.SurveyId.Value);
+        }
+
+        if (request.ClientsId.HasValue)
+        {
+            query = query.Where(q => q.ClientsId == request.ClientsId.Value);
+        }
+
+        var questions = await query
+            .OrderBy(q => q.SurveyId)
+            .ThenBy(q => q.DisplayOrder)
+            .ThenBy(q => q.CreatedAt)
             .ToListAsync(cancellationToken);
 
         return questions.Select(q =>
         {
             var dto = _mapper.Map<QuestionDto>(q);
+            dto.SurveyTitle = q.Survey?.Title;
             dto.WellbeingDimensionName = q.WellbeingDimension?.Name;
             dto.WellbeingSubDimensionName = q.WellbeingSubDimension?.Name;
             dto.ClientsName = q.Clients?.Name;

@@ -10,5 +10,5 @@ public class WellbeingDimension : BaseEntity
     
     public virtual Clients Clients { get; set; } = null!;
     public virtual ICollection<WellbeingSubDimension> WellbeingSubDimensions { get; set; } = new List<WellbeingSubDimension>();
-    public virtual ICollection<Question> Questions { get; set; } = new List<Question>();
+    public virtual ICollection<Question> Questions { get; set; } = new List<Question>(); // Optional - for backward compatibility
 }

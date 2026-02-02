@@ -11,6 +11,9 @@ using Wellbeing.Application.Features.WellbeingSubDimensions.Commands.CreateWellb
 using Wellbeing.Application.Features.WellbeingSubDimensions.Commands.UpdateWellbeingSubDimension;
 using Wellbeing.Application.Features.Questions.Commands.CreateQuestion;
 using Wellbeing.Application.Features.Questions.Commands.UpdateQuestion;
+using Wellbeing.Application.Features.Surveys.Commands.CreateSurvey;
+using Wellbeing.Application.Features.Surveys.Commands.UpdateSurvey;
+using Wellbeing.Application.Features.QuestionResponses.Commands.SubmitQuestionResponse;
 using System.Text.Json;
 
 namespace Wellbeing.Application.Mappings;
@@ -83,11 +86,87 @@ public class MappingProfile : Profile
         CreateMap<UpdateWellbeingSubDimensionCommand, WellbeingSubDimension>();
 
         CreateMap<Question, QuestionDto>()
+            .ForMember(dest => dest.SurveyTitle, opt => opt.Ignore())
             .ForMember(dest => dest.WellbeingDimensionName, opt => opt.Ignore())
             .ForMember(dest => dest.WellbeingSubDimensionName, opt => opt.Ignore())
             .ForMember(dest => dest.ClientsName, opt => opt.Ignore())
+            .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt))
+            .ForMember(dest => dest.QuestionConfig, opt => opt.Ignore())
+            .AfterMap((src, dest) =>
+            {
+                if (!string.IsNullOrEmpty(src.QuestionConfig))
+                {
+                    try
+                    {
+                        using var doc = JsonDocument.Parse(src.QuestionConfig);
+                        dest.QuestionConfig = doc.RootElement.Clone();
+                    }
+                    catch (JsonException)
+                    {
+                        dest.QuestionConfig = JsonDocument.Parse("{}").RootElement.Clone();
+                    }
+                }
+                else
+                {
+                    dest.QuestionConfig = JsonDocument.Parse("{}").RootElement.Clone();
+                }
+            });
+        CreateMap<CreateQuestionCommand, Question>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsDeleted, opt => opt.Ignore());
+        CreateMap<UpdateQuestionCommand, Question>()
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsDeleted, opt => opt.Ignore());
+
+        CreateMap<Survey, SurveyDto>()
+            .ForMember(dest => dest.ClientsName, opt => opt.Ignore())
+            .ForMember(dest => dest.QuestionsCount, opt => opt.Ignore())
             .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt));
-        CreateMap<CreateQuestionCommand, Question>();
-        CreateMap<UpdateQuestionCommand, Question>();
+        CreateMap<CreateSurveyCommand, Survey>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+            .ForMember(dest => dest.Questions, opt => opt.Ignore());
+        CreateMap<UpdateSurveyCommand, Survey>()
+            .ForMember(dest => dest.ClientsId, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+            .ForMember(dest => dest.Questions, opt => opt.Ignore());
+
+        CreateMap<QuestionResponse, QuestionResponseDto>()
+            .ForMember(dest => dest.QuestionText, opt => opt.Ignore())
+            .ForMember(dest => dest.UserName, opt => opt.Ignore())
+            .ForMember(dest => dest.ModifiedAt, opt => opt.MapFrom(src => src.UpdatedAt))
+            .ForMember(dest => dest.ResponseValue, opt => opt.Ignore())
+            .AfterMap((src, dest) =>
+            {
+                if (!string.IsNullOrEmpty(src.ResponseValue))
+                {
+                    try
+                    {
+                        using var doc = JsonDocument.Parse(src.ResponseValue);
+                        dest.ResponseValue = doc.RootElement.Clone();
+                    }
+                    catch (JsonException)
+                    {
+                        dest.ResponseValue = JsonDocument.Parse("null").RootElement.Clone();
+                    }
+                }
+                else
+                {
+                    dest.ResponseValue = JsonDocument.Parse("null").RootElement.Clone();
+                }
+            });
+        CreateMap<SubmitQuestionResponseCommand, QuestionResponse>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+            .ForMember(dest => dest.Question, opt => opt.Ignore())
+            .ForMember(dest => dest.AspNetUsers, opt => opt.Ignore())
+            .ForMember(dest => dest.Clients, opt => opt.Ignore());
     }
 }

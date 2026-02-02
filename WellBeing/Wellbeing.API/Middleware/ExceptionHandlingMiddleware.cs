@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using FluentValidation;
 
 namespace Wellbeing.API.Middleware;
 
@@ -36,6 +37,20 @@ public class ExceptionHandlingMiddleware
 
         switch (exception)
         {
+            case ValidationException validationEx:
+                code = HttpStatusCode.BadRequest;
+                var validationErrors = validationEx.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray()
+                    );
+                result = JsonSerializer.Serialize(new 
+                { 
+                    error = "Validation failed. Please check the errors below.",
+                    errors = validationErrors
+                });
+                break;
             case KeyNotFoundException:
                 code = HttpStatusCode.NotFound;
                 result = JsonSerializer.Serialize(new { error = exception.Message });
@@ -95,6 +110,14 @@ public class ExceptionHandlingMiddleware
                         else if (pgEx.ConstraintName.Contains("Question"))
                         {
                             errorMessage = "The specified question does not exist or has been deleted.";
+                        }
+                        else if (pgEx.ConstraintName.Contains("Survey"))
+                        {
+                            errorMessage = "The specified survey does not exist or has been deleted.";
+                        }
+                        else if (pgEx.ConstraintName.Contains("AspNetUsers"))
+                        {
+                            errorMessage = "The specified user does not exist or has been deleted.";
                         }
                     }
                     
