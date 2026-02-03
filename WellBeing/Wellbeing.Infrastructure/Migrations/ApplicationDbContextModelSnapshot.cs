@@ -115,9 +115,6 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -146,7 +143,8 @@ namespace Wellbeing.Infrastructure.Migrations
 
                     b.Property<string>("ClientSettings")
                         .IsRequired()
-                        .HasColumnType("jsonb");
+                        .HasColumnType("jsonb")
+                        .HasDefaultValue("{}");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -194,36 +192,158 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("QuestionConfig")
+                        .HasColumnType("jsonb");
+
                     b.Property<string>("QuestionText")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("QuestionType")
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("WellbeingDimensionId")
+                    b.Property<int?>("WellbeingDimensionId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("WellbeingSubDimensionId")
+                    b.Property<int?>("WellbeingSubDimensionId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientsId");
 
+                    b.HasIndex("SurveyId");
+
+                    b.HasIndex("SurveyId", "DisplayOrder");
+
                     b.HasIndex("WellbeingDimensionId");
 
                     b.HasIndex("WellbeingSubDimensionId");
 
                     b.ToTable("Questions", (string)null);
+                });
+
+            modelBuilder.Entity("Wellbeing.Domain.Entities.QuestionResponse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("AspNetUsersId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ClientsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ComponentIndex")
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("ComponentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ResponseValue")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AspNetUsersId");
+
+                    b.HasIndex("ClientsId");
+
+                    b.HasIndex("ComponentType");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("AspNetUsersId", "QuestionId", "IsDeleted")
+                        .HasFilter("[IsDeleted] = false");
+
+                    b.ToTable("QuestionResponses", (string)null);
+                });
+
+            modelBuilder.Entity("Wellbeing.Domain.Entities.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClientsId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientsId");
+
+                    b.HasIndex("IsActive", "IsDeleted")
+                        .HasFilter("[IsDeleted] = false");
+
+                    b.ToTable("Surveys", (string)null);
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingDimension", b =>
@@ -322,23 +442,69 @@ namespace Wellbeing.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Wellbeing.Domain.Entities.Survey", "Survey")
+                        .WithMany("Questions")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Wellbeing.Domain.Entities.WellbeingDimension", "WellbeingDimension")
                         .WithMany("Questions")
                         .HasForeignKey("WellbeingDimensionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Wellbeing.Domain.Entities.WellbeingSubDimension", "WellbeingSubDimension")
                         .WithMany("Questions")
                         .HasForeignKey("WellbeingSubDimensionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Clients");
+
+                    b.Navigation("Survey");
+
+                    b.Navigation("WellbeingDimension");
+
+                    b.Navigation("WellbeingSubDimension");
+                });
+
+            modelBuilder.Entity("Wellbeing.Domain.Entities.QuestionResponse", b =>
+                {
+                    b.HasOne("Wellbeing.Domain.Entities.AspNetUsers", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Wellbeing.Domain.Entities.Clients", "Clients")
+                        .WithMany()
+                        .HasForeignKey("ClientsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Wellbeing.Domain.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AspNetUsers");
+
+                    b.Navigation("Clients");
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Wellbeing.Domain.Entities.Survey", b =>
+                {
+                    b.HasOne("Wellbeing.Domain.Entities.Clients", "Clients")
+                        .WithMany("Surveys")
+                        .HasForeignKey("ClientsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Clients");
 
-                    b.Navigation("WellbeingDimension");
-
-                    b.Navigation("WellbeingSubDimension");
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingDimension", b =>
@@ -350,6 +516,10 @@ namespace Wellbeing.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Clients");
+
+                    b.Navigation("Questions");
+
+                    b.Navigation("WellbeingSubDimensions");
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingSubDimension", b =>
@@ -369,11 +539,15 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Navigation("Clients");
 
                     b.Navigation("WellbeingDimension");
+
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.Clients", b =>
                 {
                     b.Navigation("AspNetUsers");
+
+                    b.Navigation("Surveys");
 
                     b.Navigation("WellbeingDimensions");
                 });
@@ -383,11 +557,6 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Navigation("Questions");
 
                     b.Navigation("WellbeingSubDimensions");
-                });
-
-            modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingSubDimension", b =>
-                {
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }
