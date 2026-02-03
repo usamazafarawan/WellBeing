@@ -112,7 +112,8 @@ DELETE /api/Surveys/1
   "surveyId": 1,
   "clientsId": 1,
   "isRequired": true,
-  "displayOrder": 1,
+  "displayOrder": 1,  "wellbeingDimensionId": 0,
+  "wellbeingSubDimensionId": 0,
   "questionConfig": "{\"components\":[{\"type\":\"rating\",\"required\":true,\"config\":{\"min\":1,\"max\":5,\"labels\":[\"Strongly Disagree\",\"Disagree\",\"Neutral\",\"Agree\",\"Strongly Agree\"]}}]}"
 }
 ```
@@ -130,6 +131,8 @@ DELETE /api/Surveys/1
   "clientsId": 1,
   "isRequired": true,
   "displayOrder": 5,
+  "wellbeingDimensionId": 0,
+  "wellbeingSubDimensionId": 0,
   "questionConfig": "{\"components\":[{\"type\":\"rating\",\"required\":true,\"config\":{\"min\":1,\"max\":5,\"labels\":[\"Strongly Disagree\",\"Disagree\",\"Neutral\",\"Agree\",\"Strongly Agree\"]}},{\"type\":\"checkbox_group\",\"required\":false,\"label\":\"What is currently missing? (Select all that apply)\",\"config\":{\"options\":[{\"label\":\"Software/Applications\",\"value\":\"software\"},{\"label\":\"Hardware/Equipment\",\"value\":\"hardware\"},{\"label\":\"Budget/Funding\",\"value\":\"budget\"}]}},{\"type\":\"comment\",\"required\":false,\"config\":{\"maxLength\":1000,\"placeholder\":\"Tell us more about why you chose this...\"}}]}"
 }
 ```
@@ -147,6 +150,8 @@ DELETE /api/Surveys/1
   "clientsId": 1,
   "isRequired": true,
   "displayOrder": 3,
+  "wellbeingDimensionId": 0,
+  "wellbeingSubDimensionId": 0
   "questionConfig": "{\"components\":[{\"type\":\"dropdown\",\"required\":true,\"config\":{\"options\":[{\"label\":\"Email\",\"value\":\"email\"},{\"label\":\"In-person meeting\",\"value\":\"meeting\"},{\"label\":\"Written report\",\"value\":\"report\"},{\"label\":\"Phone call\",\"value\":\"phone\"}]}}]}"
 }
 ```
@@ -164,6 +169,8 @@ DELETE /api/Surveys/1
   "clientsId": 1,
   "isRequired": false,
   "displayOrder": 4,
+  "wellbeingDimensionId": 0,
+  "wellbeingSubDimensionId": 0,
   "questionConfig": "{\"components\":[{\"type\":\"checkbox_group\",\"required\":false,\"config\":{\"options\":[{\"label\":\"Health Insurance\",\"value\":\"health\"},{\"label\":\"Retirement Plan\",\"value\":\"retirement\"},{\"label\":\"Paid Time Off\",\"value\":\"pto\"},{\"label\":\"Flexible Work Hours\",\"value\":\"flexible\"},{\"label\":\"Professional Development\",\"value\":\"development\"}]}}]}"
 }
 ```
@@ -181,6 +188,8 @@ DELETE /api/Surveys/1
   "clientsId": 1,
   "isRequired": false,
   "displayOrder": 10,
+  "wellbeingDimensionId": 0,
+  "wellbeingSubDimensionId": 0,
   "questionConfig": "{\"components\":[{\"type\":\"comment\",\"required\":false,\"config\":{\"maxLength\":2000,\"placeholder\":\"Enter your comments here...\"}}]}"
 }
 ```
