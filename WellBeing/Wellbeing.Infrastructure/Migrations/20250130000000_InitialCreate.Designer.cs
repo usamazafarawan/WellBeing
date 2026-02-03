@@ -519,10 +519,6 @@ namespace Wellbeing.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Clients");
-
-                    b.Navigation("Questions");
-
-                    b.Navigation("WellbeingSubDimensions");
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingSubDimension", b =>
@@ -542,8 +538,6 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Navigation("Clients");
 
                     b.Navigation("WellbeingDimension");
-
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("Wellbeing.Domain.Entities.Clients", b =>
@@ -560,6 +554,11 @@ namespace Wellbeing.Infrastructure.Migrations
                     b.Navigation("Questions");
 
                     b.Navigation("WellbeingSubDimensions");
+                });
+
+            modelBuilder.Entity("Wellbeing.Domain.Entities.WellbeingSubDimension", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }
