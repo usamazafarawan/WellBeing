@@ -76,6 +76,14 @@ if (app.Environment.IsDevelopment())
             context.Database.Migrate();
             logger.LogInformation("Migrations applied successfully.");
         }
+        catch (Npgsql.PostgresException ex) when (ex.SqlState == "42P07")
+        {
+            logger.LogError(ex, 
+                "Migration error: Table already exists (42P07). This means tables exist but migration history is missing. " +
+                "Solution 1: Run Database/FixMigrationHistory.sql to sync migration history. " +
+                "Solution 2: Drop all tables using Database/DropAllTables.sql, then restart the application.");
+            throw; // Re-throw to prevent app from starting with bad database state
+        }
         catch (Npgsql.PostgresException ex) when (ex.SqlState == "42P01")
         {
             logger.LogError(ex, 
@@ -90,6 +98,14 @@ if (app.Environment.IsDevelopment())
                 "Migration error: Table does not exist (42P01). This usually means migrations are in an inconsistent state. " +
                 "Solution: Drop and recreate the database, then restart the application. " +
                 "SQL: DROP DATABASE IF EXISTS \"WellbeingDb\"; CREATE DATABASE \"WellbeingDb\";");
+            throw; // Re-throw to prevent app from starting with bad database state
+        }
+        catch (Exception ex) when (ex.Message.Contains("already exists") || ex.Message.Contains("42P07"))
+        {
+            logger.LogError(ex, 
+                "Migration error: Table already exists (42P07). This means tables exist but migration history is missing. " +
+                "Solution 1: Run Database/FixMigrationHistory.sql to sync migration history. " +
+                "Solution 2: Drop all tables using Database/DropAllTables.sql, then restart the application.");
             throw; // Re-throw to prevent app from starting with bad database state
         }
         catch (Exception ex)
