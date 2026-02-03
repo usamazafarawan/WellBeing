@@ -212,6 +212,9 @@ _pkginfo.txt
 *.[Cc]ache
 !?*.[Cc]ache/
 
+# Visual Studio index files
+*.vsidx
+
 # Others
 ClientBin/
 ~$*
