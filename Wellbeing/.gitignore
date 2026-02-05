@@ -1,0 +1,345 @@
+# ===========================================
+# .NET Core / .NET 8
+# ===========================================
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
+
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Oo]ut/
+
+# ===========================================
+# Next.js / Node.js
+# ===========================================
+Client/node_modules/
+Client/.next/
+Client/out/
+Client/build/
+Client/dist/
+Client/.turbo/
+Client/.vercel/
+Client/.swc/
+
+Client/*.tsbuildinfo
+Client/.next-env.d.ts
+
+Client/.env
+Client/.env*.local
+Client/.env.production
+Client/.env.development
+
+Client/npm-debug.log*
+Client/yarn-debug.log*
+Client/yarn-error.log*
+Client/pnpm-debug.log*
+Client/lerna-debug.log*
+
+Client/.pnpm-debug.log*
+Client/.yarn-integrity
+
+Client/.cache/
+Client/.parcel-cache/
+Client/.next/cache/
+
+# ===========================================
+# Visual Studio / IDEs
+# ===========================================
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+.localhistory/
+
+.idea/
+*.sln.iml
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# ===========================================
+# Build Results
+# ===========================================
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# ===========================================
+# Testing
+# ===========================================
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+coverage/
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# ===========================================
+# Database Files
+# ===========================================
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+*.sqlite3
+*.sql.backup
+*.sql.gz
+*.dump
+pg_dump_*
+
+# ===========================================
+# Application Settings & Secrets
+# ===========================================
+**/Properties/secrets.json
+**/appsettings.*.json
+!**/appsettings.json
+!**/appsettings.Development.json
+
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# ===========================================
+# Entity Framework Migrations
+# ===========================================
+# Note: Migrations should be committed, but uncomment if you want to ignore them
+# Server/**/Migrations/*.Designer.cs
+# Server/**/Migrations/*.cs
+# !Server/**/Migrations/*Snapshot.cs
+
+# ===========================================
+# NuGet Packages
+# ===========================================
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# ===========================================
+# Publish Profiles
+# ===========================================
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+PublishScripts/
+publish/
+
+# ===========================================
+# Docker
+# ===========================================
+docker-compose.override.yml
+*.dockerignore
+
+# ===========================================
+# OS Generated Files
+# ===========================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===========================================
+# Temporary Files
+# ===========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ===========================================
+# Logs
+# ===========================================
+logs/
+*.log
+*.log.*
+
+# ===========================================
+# Miscellaneous
+# ===========================================
+*.pfx
+*.publishsettings
+*.binlog
+*.tss
+*.jmconfig
+*.nvuser
+.mfractor/
+.ionide/
+.axoCover/*
+!.axoCover/settings.json
+.fake/
+.paket/paket.exe
+paket-files/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+_TeamCity*
+*.dotCover
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+*.mm.*
+AutoTest.Net/
+.sass-cache/
+[Ee]xpress/
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+ClientBin/
+~$*
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+orleans.codegen.cs
+Generated_Code/
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+*.rptproj.rsuser
+*- [Bb]ackup.rdl
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+FakesAssemblies/
+*.GhostDoc.xml
+.ntvs_analysis.dat
+*.plg
+*.opt
+*.vbw
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+.cr/personal
+__pycache__/
+*.pyc
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.e2e
+$tf/
+*.gpState
+*.tss
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+OpenCover/
+ASALocalRun/
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+mono_crash.*
+healthchecksdb
+MigrationBackup/
+FodyWeavers.xsd
+_Chutzpah*

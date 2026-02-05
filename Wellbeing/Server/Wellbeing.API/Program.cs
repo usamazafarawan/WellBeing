@@ -121,8 +121,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// CRITICAL: Disable HTTPS redirection in development to avoid CORS preflight redirect issues
+// The browser sends OPTIONS requests for CORS, and redirects on preflight requests are NOT ALLOWED
+// This causes: "Redirect is not allowed for a preflight request" error
+var appLogger = app.Services.GetRequiredService<ILogger<Program>>();
 
+if (app.Environment.IsDevelopment())
+{
+    // DO NOT use HTTPS redirection in development
+    appLogger.LogWarning("═══════════════════════════════════════════════════════════");
+    appLogger.LogWarning("DEVELOPMENT MODE: HTTPS redirection is DISABLED");
+    appLogger.LogWarning("HTTP requests on port 5152 will work without redirects");
+    appLogger.LogWarning("If you see redirect errors, RESTART the server!");
+    appLogger.LogWarning("═══════════════════════════════════════════════════════════");
+}
+else
+{
+    appLogger.LogInformation("PRODUCTION MODE: HTTPS redirection is ENABLED");
+    app.UseHttpsRedirection();
+}
+
+// CORS must be before UseAuthorization and after UseRouting (if used)
+// This ensures CORS headers are added to OPTIONS preflight requests
 app.UseCors("AllowAll");
 
 app.UseMiddleware<Wellbeing.API.Middleware.ExceptionHandlingMiddleware>();
